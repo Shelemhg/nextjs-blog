@@ -1,12 +1,21 @@
+// pages/posts/[id].tsx
 import Layout from '../../components/layout';
 import { getAllPostIds, getPostData } from '../../lib/posts';
 import Head from 'next/head';
 import Date from '../../components/date';
 import utilStyles from '../../styles/utils.module.css';
 
-export default function Post({ postData }) {
+interface PostProps {
+  postData: {
+    title: string;
+    date: string;
+    contentHtml: string;
+  };
+}
+
+const Post: React.FC<PostProps> = ({ postData }) => {
   return (
-    <Layout>
+    <Layout home={false}> {/* Set home prop to false or true based on your logic */}
       <Head>
         <title>{postData.title}</title>
       </Head>
@@ -19,7 +28,7 @@ export default function Post({ postData }) {
       </article>
     </Layout>
   );
-}
+};
 
 export async function getStaticPaths() {
   const paths = getAllPostIds();
@@ -37,3 +46,5 @@ export async function getStaticProps({ params }) {
     },
   };
 }
+
+export default Post;

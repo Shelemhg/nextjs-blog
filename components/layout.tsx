@@ -1,15 +1,20 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Script from 'next/script';
+import Link from 'next/link';
 
 import styles from './layout.module.css';
 import utilStyles from '../styles/utils.module.css';
-import Link from 'next/link';
+
+interface LayoutProps {
+  children: React.ReactNode;
+  home?: boolean;
+}
 
 const name = 'Shelem H.';
 export const siteTitle = 'Next.js Sample Website';
 
-export default function Layout({ children, home }) {
+const Layout: React.FC<LayoutProps> = ({ children, home }) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -31,7 +36,9 @@ export default function Layout({ children, home }) {
         src="https://connect.facebook.net/en_US/sdk.js"
         strategy="lazyOnload"
         onLoad={() =>
-          console.log(`script loaded correctly, window.FB has been populated`)
+          console.log(
+            `script loaded correctly, window.FB has been populated`,
+          )
         }
       />
       <header className={styles.header}>
@@ -75,4 +82,6 @@ export default function Layout({ children, home }) {
       )}
     </div>
   );
-}
+};
+
+export default Layout;
