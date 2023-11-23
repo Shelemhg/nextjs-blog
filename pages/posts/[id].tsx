@@ -30,7 +30,7 @@ const Post: React.FC<PostProps> = ({ postData }) => {
   );
 };
 
-export async function getStaticPaths() {
+export async function GetStaticPaths() {
   const paths = getAllPostIds();
   return {
     paths,
@@ -38,7 +38,7 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps({ params }) {
+export async function GetStaticProps({ params }) {
   const postData = await getPostData(params.id);
   return {
     props: {
